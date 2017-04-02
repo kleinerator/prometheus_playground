@@ -1,0 +1,16 @@
+---
+- name: Configure Development Box
+  vars:
+    ansible_ssh_user: vagrant
+    ansible_ssh_port: 2222
+    ansible_ssh_private_key_file: "{{ playbook_dir }}/.vagrant/machines/default/virtualbox/private_key"
+  hosts: default
+  remote_user: vagrant
+  become: True
+  roles:
+    - base
+    - docker
+    - { role: prometheus, prometheus_version: 1.5.2, vm_private_ip: 10.100.198.200 }
+    - { role: node_exporter, node_exporter_version: 0.14.0 }
+    - { role: alertmanager, alertmanager_version: 0.5.1, vm_private_ip: 10.100.198.200 }
+    - cadvisor

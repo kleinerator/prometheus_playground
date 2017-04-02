@@ -1,0 +1,15 @@
+[Unit]
+Description=Prometheus Alert Manager
+After=network.target
+
+[Service]
+WorkingDirectory=/usr/local/share/alertmanager-{{ alertmanager_version }}.linux-amd64
+ExecStart=/usr/local/share/alertmanager-{{ alertmanager_version }}.linux-amd64/alertmanager \
+    -log.level=debug \
+    -storage.path="/usr/local/share/alertmanager-{{ alertmanager_version }}.linux-amd64/amdata" \
+    -config.file=/etc/prometheus/alertmanager.conf \
+    -web.external-url=http://{{ vm_private_ip }}:9093/alert-manager/
+User=root
+
+[Install]
+WantedBy=multi-user.target

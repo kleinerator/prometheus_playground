@@ -1,0 +1,15 @@
+[Unit]
+Description=Prometheus server
+After=network.target
+
+[Service]
+WorkingDirectory=/usr/local/share/prometheus-{{ prometheus_version }}.linux-amd64/
+ExecStart=/usr/local/share/prometheus-{{ prometheus_version }}.linux-amd64/prometheus \
+    -storage.local.path=/usr/local/share/prometheus-{{ prometheus_version }}.linux-amd64/data \
+    -config.file=/etc/prometheus/prometheus.yml \
+    -alertmanager.url=http://localhost:9093/alert-manager \
+    -web.external-url=http://{{ vm_private_ip }}:9090/
+User=root
+
+[Install]
+WantedBy=multi-user.target

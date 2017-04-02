@@ -1,0 +1,21 @@
+###
+# APT Update and Upgrade
+#
+- name: Update APT package cache
+  action: apt update_cache=yes
+  tags: apt
+  when: ansible_os_family == "Debian"
+
+- name: Upgrade APT packages
+  action: apt upgrade=safe
+  tags: apt
+  when: ansible_os_family == "Debian"
+
+- name: General | Install required packages
+  package: name={{ item }} state=installed
+  with_items:
+    - unzip
+    - sysstat
+    - python-selinux
+    - screen
+  when: ansible_os_family == "Debian"

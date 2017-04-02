@@ -1,0 +1,17 @@
+- name: create directory /usr/local/share/cadvisor
+  file:
+    path: /usr/local/share/cadvisor
+    state: directory
+
+- name: copy docker-compose.yml
+  copy:
+    src: docker-compose.yml
+    dest: /usr/local/share/cadvisor/docker-compose.yml
+    owner: root
+    group: root
+    mode: 0664
+
+- name: run docker up
+  command: /usr/local/bin/docker-compose up -d
+  args:
+    chdir: /usr/local/share/cadvisor

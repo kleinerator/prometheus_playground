@@ -1,0 +1,35 @@
+- name: unarchive alertmanager
+  unarchive:
+    src: https://github.com/prometheus/alertmanager/releases/download/v{{ alertmanager_version }}/alertmanager-{{ alertmanager_version }}.linux-amd64.tar.gz
+    dest: /usr/local/share
+    remote_src: True
+    creates: /usr/local/share/alertmanager-{{ alertmanager_version }}.linux-amd64
+
+- name: install start script
+  template:
+    src: alertmanager.service
+    dest: /etc/systemd/system/alertmanager.service
+    owner: root
+    group: root
+    mode: 0755
+
+- name: daemon reload
+  systemd: daemon_reload=yes name=alertmanager
+
+- name: copy alertmanager conf file
+  copy:
+    src: alertmanager.conf
+    dest: /etc/prometheus/alertmanager.conf
+    owner: root
+    group: root
+    mode: 664
+
+- name: enable alertmanager
+  systemd:
+    enabled: yes
+    name: alertmanager
+
+- name: start alertmanager
+  systemd:
+    state: started
+    name: alertmanager

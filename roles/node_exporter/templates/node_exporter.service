@@ -1,0 +1,12 @@
+[Unit]
+Description=node_exporter server
+After=network.target
+
+[Service]
+WorkingDirectory=/usr/local/share/node_exporter-{{ node_exporter_version }}.linux-amd64/
+ExecStart=/usr/local/share/node_exporter-{{ node_exporter_version }}.linux-amd64/node_exporter \
+    --collectors.enabled "conntrack,diskstats,entropy,edac,filefd,filesystem,hwmon,infiniband,loadavg,mdadm,meminfo,netdev,netstat,sockstat,stat,textfile,time,uname,vmstat,systemd"
+User=root
+
+[Install]
+WantedBy=multi-user.target

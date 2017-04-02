@@ -1,0 +1,28 @@
+- name: unarchive node-exporter
+  unarchive:
+    src: "https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-amd64.tar.gz"
+    dest: /usr/local/share
+    remote_src: True
+    creates: /usr/local/share/node_exporter-{{ node_exporter_version }}.linux-amd64
+
+
+- name: install start script
+  template:
+    src: node_exporter.service
+    dest: /etc/systemd/system/node_exporter.service
+    owner: root
+    group: root
+    mode: 0755
+
+- name: daemon reload
+  systemd: daemon_reload=yes name=node_exporter
+
+- name: enable node_exporter
+  systemd:
+    enabled: yes
+    name: node_exporter
+
+- name: start node_exporter
+  systemd:
+    state: started
+    name: node_exporter

@@ -1,0 +1,11 @@
+[Unit]
+Description=cadvisor server
+After=network.target
+
+[Service]
+WorkingDirectory=/usr/local/share/cadvisor/
+ExecStart=/usr/local/bin/docker-compose up -d
+User=root
+
+[Install]
+WantedBy=multi-user.target

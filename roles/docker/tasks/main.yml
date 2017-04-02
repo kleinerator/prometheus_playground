@@ -1,0 +1,32 @@
+---
+- name: General | Install required packages
+  package: name={{ item }} state=installed
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+  when: ansible_os_family == "Debian"
+
+- apt_key:
+    url: "https://download.docker.com/linux/ubuntu/gpg"
+    state: present
+
+- name: Add Docker Repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu yakkety stable
+  notify:
+  - update apt
+
+- name: Install Docker-CE
+  package: name={{ item }} state=installed
+  with_items:
+    - docker-ce
+  when: ansible_os_family == "Debian"
+
+- name: Install Latest docker-compose
+  get_url:
+    url: https://github.com/docker/compose/releases/download/1.11.2/docker-compose-Linux-x86_64
+    dest: /usr/local/bin/docker-compose
+    owner: root
+    group: root
+    mode: 0777

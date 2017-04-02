@@ -1,0 +1,45 @@
+- name: unarchive prometheus archive
+  unarchive:
+    src: "https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/prometheus-{{ prometheus_version }}.linux-amd64.tar.gz"
+    dest: /usr/local/share
+    remote_src: True
+    creates: /usr/local/share/prometheus-{{ prometheus_version }}.linux-amd64
+
+- name: install start script
+  template:
+    src: prometheus.service
+    dest: /etc/systemd/system/prometheus.service
+    owner: root
+    group: root
+    mode: 0755
+  notify: daemon reload
+
+- name: enable prometheus
+  systemd:
+    enabled: yes
+    name: prometheus
+
+- name: create /etc/prometheus directory
+  file:
+    path: /etc/prometheus
+    state: directory
+    owner: root
+    group: root
+
+- name: copy prometheus configuration
+  copy:
+    src: prometheus.yml
+    dest: /etc/prometheus/prometheus.yml
+    owner: root
+    group: root
+    mode: 0664
+  notify: restart prometheus
+
+- name: copy prometheus alerts
+  copy:
+    src: alert.rules
+    dest: /etc/prometheus/alert.rules
+    owner: root
+    group: root
+    mode: 0664
+  notify: restart prometheus
