@@ -1,0 +1,51 @@
+- name: General | Install required packages
+  package: name={{ item }} state=installed
+  with_items:
+    - adduser
+    - libfontconfig
+  when: ansible_os_family == "Debian"
+
+- name: get deb package
+  apt:
+    deb: https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_4.2.0_amd64.deb
+
+- name: start grafana
+  service:
+    name: grafana-server
+    state: started
+
+- name: Add DataSource
+  uri:
+    url: http://10.100.198.200:3000/api/datasources
+    method: POST
+    user: admin
+    password: admin
+    body: "{{ lookup('file','datasource.json')}}"
+    force_basic_auth: yes
+    status_code: 200
+    body_format: json
+  ignore_errors: True
+
+- name: Add Docker Dashboard
+  uri:
+    url: http://10.100.198.200:3000/api/dashboards/import
+    method: POST
+    user: admin
+    password: admin
+    body: "{{ lookup('file','docker_dashboard.json')}}"
+    force_basic_auth: yes
+    status_code: 200
+    body_format: json
+  ignore_errors: True
+
+- name: Add Node Dashboard
+  uri:
+    url: http://10.100.198.200:3000/api/dashboards/import
+    method: POST
+    user: admin
+    password: admin
+    body: "{{ lookup('file','node_dashboard.json')}}"
+    force_basic_auth: yes
+    status_code: 200
+    body_format: json
+  ignore_errors: True
