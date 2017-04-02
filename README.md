@@ -6,8 +6,9 @@ It also has docker-ce docker-compose and cadvisor container running for containe
 
 ## Build VM
 
-  $ vagrant up
-  $ ansible-playbook -i inventory prometheus.yml
+  $ `vagrant up`
+
+  $ `ansible-playbook -i inventory prometheus.yml`
 
 ## URLs
 
