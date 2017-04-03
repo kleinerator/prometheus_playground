@@ -1,5 +1,5 @@
 ALERT containerMissing
-    IF absent(((time() - container_last_seen{name="cadvisor"}) < 5)) FOR 5s
+    IF absent(((time() - container_last_seen{name="nginx"}) < 5)) FOR 5s
     LABELS { severity="page" }
     ANNOTATIONS {
       SUMMARY = "Instance {{$labels.instance}} down",
@@ -7,7 +7,7 @@ ALERT containerMissing
     }
 
 ALERT containerSpinLoop
-    IF container_start_time_seconds{name="cadvisor"} < 5 FOR 10s
+    IF container_start_time_seconds{name="nginx"} < 5 FOR 10s
     LABELS { severity="page" }
     ANNOTATIONS {
       SUMMARY = "Instance {{$labels.instance}} stuck in restart loop",

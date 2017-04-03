@@ -10,6 +10,7 @@
   roles:
     - base
     - docker
+    - nginx
     - { role: prometheus, prometheus_version: 1.5.2, vm_private_ip: 10.100.198.200 }
     - { role: node_exporter, node_exporter_version: 0.14.0 }
     - { role: alertmanager, alertmanager_version: 0.5.1, vm_private_ip: 10.100.198.200 }
