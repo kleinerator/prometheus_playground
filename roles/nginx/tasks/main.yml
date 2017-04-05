@@ -1,3 +1,4 @@
 - name: run nginx container
   command: docker run --name nginx -d nginx
   become: True
+  ignore_errors: True

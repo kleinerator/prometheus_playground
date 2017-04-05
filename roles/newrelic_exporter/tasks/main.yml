@@ -1,3 +1,0 @@
-- name: run container
-  command: docker run -d -p 9126:9126 jfindley/newrelic-exporter --api.key=f3d4d586f66cafba6de7cda69c0ae84e44e45d34
-  become: True
