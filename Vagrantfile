@@ -3,7 +3,7 @@
 
 Vagrant.configure("2") do |config|
 
-  config.vm.box = "bento/ubuntu-16.10"
+  config.vm.box = "ubuntu/yakkety64"
 
   config.vm.network "forwarded_port", guest: 9090, host: 9090
   config.vm.network "forwarded_port", guest: 9093, host: 9093
@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
     apt-get update
     apt-get upgrade -y
-    apt-get install -y aptitude
+    apt-get install -y aptitude python-minimal
   SHELL
 
   config.vm.provision "ansible" do |ansible|

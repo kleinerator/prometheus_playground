@@ -16,12 +16,10 @@ This has only been tested on OSX. I used homebrew to install ansible.
 
   $ `vagrant up`
 
-  $ `ansible-playbook -i inventory prometheus.yml`
-
 ## URLs
 
   * *prometheus*: http://localhost:9090
-  * *alertmanager*: http://localhost:9093
+  * *alertmanager*: http://localhost:9093/alert-manager/
   * *grafana*: http://localhost:3000
 
 ## updates
