@@ -12,16 +12,17 @@ Vagrant.configure("2") do |config|
   config.vm.provider "virtualbox" do |vb|
     # Customize the amount of memory on the VM:
     vb.memory = "3092"
+    vb.name = "prometheus"
   end
 
   config.vm.provision "shell", inline: <<-SHELL
     apt-get update
-    apt-get upgrade -y
-    apt-get install -y aptitude python-minimal
+    #apt-get upgrade -y
+    apt-get install -y aptitude make
   SHELL
 
-  config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "prometheus.yml"
-  end
+  # config.vm.provision "ansible" do |ansible|
+  #   ansible.playbook = "prometheus.yml"
+  # end
 
 end

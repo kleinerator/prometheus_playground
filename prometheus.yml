@@ -11,8 +11,8 @@
     - base
     - docker
     - nginx
-    - { role: prometheus, prometheus_version: 1.7.0, vm_private_ip: 127.0.0.1 }
+    - { role: prometheus, prometheus_version: 1.7.1, vm_private_ip: 127.0.0.1 }
     - { role: node_exporter, node_exporter_version: 0.14.0 }
-    - { role: alertmanager, alertmanager_version: 0.7.1, vm_private_ip: 127.0.0.1 }
+    - { role: alertmanager, alertmanager_version: 0.8.0, vm_private_ip: 127.0.0.1 }
     - cadvisor
     - grafana
