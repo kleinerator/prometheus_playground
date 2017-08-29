@@ -2,7 +2,7 @@
 - name: Configure Development Box
   vars:
     ansible_ssh_user: ubuntu
-    ansible_ssh_port: 2222
+    ansible_ssh_port: 2424
     ansible_ssh_private_key_file: "{{ playbook_dir }}/.vagrant/machines/default/virtualbox/private_key"
   hosts: default
   remote_user: vagrant
