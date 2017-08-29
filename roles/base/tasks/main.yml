@@ -6,10 +6,10 @@
   tags: apt
   when: ansible_os_family == "Debian"
 
-- name: Upgrade APT packages
-  action: apt upgrade=safe
-  tags: apt
-  when: ansible_os_family == "Debian"
+# - name: Upgrade APT packages
+#   action: apt upgrade=safe
+#   tags: apt
+#   when: ansible_os_family == "Debian"
 
 - name: General | Install required packages
   package: name={{ item }} state=installed

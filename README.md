@@ -16,6 +16,11 @@ This has only been tested on OSX. I used homebrew to install ansible.
 
   $ `vagrant up`
 
+
+### Troubleshooting
+
+If ansible fails to connect, check the SSH port `vagrant ssh-config` and make sure it's the same as in the prometheus.yml file.
+
 ## URLs
 
   * *prometheus*: http://localhost:9090
