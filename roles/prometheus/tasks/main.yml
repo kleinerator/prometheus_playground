@@ -37,8 +37,8 @@
 
 - name: copy prometheus alerts
   copy:
-    src: alert.rules
-    dest: /etc/prometheus/alert.rules
+    src: alert.yml
+    dest: /etc/prometheus/alert.yml
     owner: root
     group: root
     mode: 0664

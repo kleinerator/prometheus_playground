@@ -5,10 +5,10 @@ After=network.target
 [Service]
 WorkingDirectory=/usr/local/share/prometheus-{{ prometheus_version }}.linux-amd64/
 ExecStart=/usr/local/share/prometheus-{{ prometheus_version }}.linux-amd64/prometheus \
-    -storage.local.path=/usr/local/share/prometheus-{{ prometheus_version }}.linux-amd64/data \
-    -config.file=/etc/prometheus/prometheus.yml \
-    -alertmanager.url=http://localhost:9093/alert-manager \
-    -web.external-url=http://{{ vm_private_ip }}:9090/
+    --config.file=/etc/prometheus/prometheus.yml \
+    --storage.tsdb.path=/usr/local/share/prometheus-{{ prometheus_version }}.linux-amd64/data \
+    --web.console.libraries=/usr/local/share/prometheus-{{ prometheus_version }}.linux-amd64/console_libraries \
+    --web.console.templates=/usr/local/share/prometheus-{{ prometheus_version }}.linux-amd64/consoles
 User=root
 
 [Install]
