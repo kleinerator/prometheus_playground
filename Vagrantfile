@@ -18,11 +18,11 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
     apt-get update
     #apt-get upgrade -y
-    apt-get install -y aptitude make
+    apt-get install -y aptitude python-minimal
   SHELL
 
-  # config.vm.provision "ansible" do |ansible|
-  #   ansible.playbook = "prometheus.yml"
-  # end
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "prometheus.yml"
+  end
 
 end
