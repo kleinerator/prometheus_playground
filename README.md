@@ -15,6 +15,7 @@ This has only been tested on OSX. I used homebrew to install ansible.
 ## Build VM
 
   $ `vagrant up`
+  $ `./run_ansible.sh`
 
 
 ### Troubleshooting

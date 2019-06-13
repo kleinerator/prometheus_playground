@@ -1,6 +1,6 @@
 ---
 - name: General | Install required packages
-  package: name={{ item }} state=installed
+  package: name={{ item }} state=present
   with_items:
     - apt-transport-https
     - ca-certificates
@@ -10,15 +10,16 @@
 - apt_key:
     url: "https://download.docker.com/linux/ubuntu/gpg"
     state: present
+    validate_certs: false
 
 - name: Add Docker Repository
   apt_repository:
-    repo: deb https://download.docker.com/linux/ubuntu yakkety stable
+    repo: deb https://download.docker.com/linux/ubuntu xenial stable
   notify:
   - update apt
 
 - name: Install Docker-CE
-  package: name={{ item }} state=installed
+  package: name={{ item }} state=present
   with_items:
     - docker-ce
   when: ansible_os_family == "Debian"

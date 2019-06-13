@@ -12,7 +12,7 @@
 #   when: ansible_os_family == "Debian"
 
 - name: General | Install required packages
-  package: name={{ item }} state=installed
+  package: name={{ item }} state=present
   with_items:
     - unzip
     - sysstat
